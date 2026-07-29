@@ -3,8 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 
-test("analyse shows move history and restart appears after the first move", async () => {
-  const user = userEvent.setup();
+test("analyse shows move history and restart appears after a win", async () => {
+  const user = userEvent;
   render(<App />);
 
   expect(screen.queryByRole("button", { name: /restart game/i })).not.toBeInTheDocument();
@@ -17,7 +17,12 @@ test("analyse shows move history and restart appears after the first move", asyn
     .filter((button) => button.className === "square");
 
   await user.click(squares[0]);
-  expect(squares[0]).toHaveTextContent("X");
+  await user.click(squares[3]);
+  await user.click(squares[1]);
+  await user.click(squares[4]);
+  await user.click(squares[2]);
+
+  expect(screen.getByText(/winner x/i)).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /restart game/i })).toBeInTheDocument();
 
   await user.click(screen.getByRole("button", { name: /restart game/i }));

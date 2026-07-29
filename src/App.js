@@ -61,6 +61,7 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const [showMoves, setShowMoves] = useState(false);
+  const [matchFinish, setMatchFinish] = useState(false);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -68,17 +69,19 @@ export default function Game() {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
-    
+    setMatchFinish(calcualteWinner(nextSquares) !== null);
   }
 
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
+    setMatchFinish(calcualteWinner(history[nextMove]) !== null);
   }
 
   function restartGame() {
     setHistory([Array(9).fill(null)]);
     setCurrentMove(0);
     setShowMoves(false);
+    setMatchFinish(false);
   }
 
   const moves = history.map((squares, move) => {
@@ -113,14 +116,14 @@ export default function Game() {
         
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         {currentMove > 0 && (
+          <button className="analyse-button" onClick={() => setShowMoves(true)}>
+            Analyse
+          </button>
+        )} 
+        {matchFinish && (
           <button className="restart-button" onClick={restartGame}>
             Restart Game
           </button>
-        )}
-        {currentMove > 0 && (
-        <button className="analyse-button" onClick={() => setShowMoves(true)}>
-          Analyse
-        </button>
         )}
       </div>
 
