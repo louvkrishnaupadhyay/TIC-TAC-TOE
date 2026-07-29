@@ -196,7 +196,8 @@ body {
 @media (max-width: 768px) {
   body {
     padding: 12px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
   }
 
   .game {
