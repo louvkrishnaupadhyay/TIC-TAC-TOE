@@ -1,10 +1,11 @@
 /* RESET */
 body {
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,13 +54,21 @@ body {
 /* MAIN GAME CONTAINER */
 .game {
   display: flex;
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: 30px;
   align-items: flex-start;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
-  padding: 30px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+  width: min(100%, 900px);
+}
+
+.game-board {
+  flex: 1 1 280px;
+  max-width: 360px;
 }
 
 /* BOARD */
@@ -68,8 +77,10 @@ body {
 }
 
 .square {
-  width: 90px;
-  height: 90px;
+  width: min(24vw, 90px);
+  height: min(24vw, 90px);
+  max-width: 90px;
+  max-height: 90px;
   margin: 6px;
   font-size: 32px;
   font-weight: bold;
@@ -129,6 +140,7 @@ body {
 /* MOVE HISTORY PANEL */
 .game-info {
   width: 220px;
+  max-width: 100%;
   max-height: 350px;
   overflow-y: auto;
   padding: 15px;
@@ -176,4 +188,56 @@ body {
 .game-info::-webkit-scrollbar-thumb {
   background: cyan;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .game {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .square {
+    width: 70px;
+    height: 70px;
+    margin: 4px;
+    font-size: 28px;
+  }
+
+  .status {
+    font-size: 18px;
+  }
+
+  .game-info {
+    width: 100%;
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
+  .game {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .square {
+    width: 58px;
+    height: 58px;
+    margin: 3px;
+    font-size: 24px;
+  }
+
+  .analyse-button,
+  .restart-button {
+    padding: 10px;
+    font-size: 14px;
+  }
 }
