@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateRoom from "./pages/CreatRoom.js";
 import JoinRoom from "./pages/JoinRoom.js";
 import Lobby from "./pages/Lobby.js";
+import Register from "./pages/Register";
 
 import Login from "./pages/Login.js";
 import Home from "./pages/Home.js";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/create-room" element={<CreateRoom />} />
         <Route path="/join-room" element={<JoinRoom />} />
         <Route path="/lobby" element={<Lobby />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
