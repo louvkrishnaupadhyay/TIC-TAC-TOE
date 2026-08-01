@@ -7,17 +7,55 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home.js";
 import Game from "./pages/Game.js";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="/create-room" element={<CreateRoom />} />
-        <Route path="/join-room" element={<JoinRoom />} />
-        <Route path="/lobby" element={<Lobby />} />
+
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/game"
+          element={
+            <ProtectedRoute>
+              <Game />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-room"
+          element={
+            <ProtectedRoute>
+              <CreateRoom />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/join-room"
+          element={
+            <ProtectedRoute>
+              <JoinRoom />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lobby"
+          element={
+            <ProtectedRoute>
+              <Lobby />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
