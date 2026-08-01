@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
 
-  const player = localStorage.getItem("playerName");
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="home-container">

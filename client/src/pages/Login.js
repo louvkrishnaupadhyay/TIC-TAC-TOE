@@ -16,9 +16,7 @@ function Login() {
             return;
         }
 
-        localStorage.setItem("playerName",name);
-
-        navigate("/home");
+        alert("Backend login will be connected next.");
     }
 
     return(

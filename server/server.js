@@ -14,16 +14,18 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/", (req,res)=>{
 
-    res.send("Backend Running 🚀");
+// Routes
+app.use("/api/auth", require("./routes/authRoutes"));
 
+
+app.get("/", (req, res) => {
+    res.send("Tic Tac Toe Backend Running 🚀");
 });
 
-const PORT=process.env.PORT||5000;
 
-app.listen(PORT,()=>{
+const PORT = process.env.PORT || 5000;
 
-    console.log(`Server running on ${PORT}`);
-
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
