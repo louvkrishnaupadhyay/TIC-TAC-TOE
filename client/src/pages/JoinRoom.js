@@ -1,58 +1,144 @@
-import { useState } from "react";
+import {
+    useContext,
+    useEffect,
+    useState
+} from "react";
+
 import { useNavigate } from "react-router-dom";
 
-function JoinRoom(){
+import socket from "../socket/socket";
+import { AuthContext } from "../context/AuthContext";
 
-    const [room,setRoom]=useState("");
 
-    const navigate=useNavigate();
+function JoinRoom() {
 
-    function joinRoom(){
+    const [roomCode, setRoomCode] = useState("");
 
-        if(room.trim()===""){
+    const navigate = useNavigate();
 
-            alert("Enter Room Code");
+    const { user } = useContext(AuthContext);
+
+
+    useEffect(() => {
+
+        if (!socket.connected) {
+            socket.connect();
+        }
+
+
+        function handleRoomJoined(data) {
+
+    console.log("Room joined:", data);
+
+    localStorage.setItem(
+        "roomCode",
+        data.roomCode
+    );
+
+    localStorage.setItem(
+        "symbol",
+        data.symbol
+    );
+
+    navigate("/online-game");
+}
+
+
+        const handleError = (data) => {
+
+            alert(data.message);
+
+        };
+
+
+        socket.on(
+            "roomJoined",
+            handleRoomJoined
+        );
+
+        socket.on(
+            "roomError",
+            handleError
+        );
+
+
+        return () => {
+
+            socket.off(
+                "roomJoined",
+                handleRoomJoined
+            );
+
+            socket.off(
+                "roomError",
+                handleError
+            );
+
+        };
+
+    }, [navigate]);
+
+
+    function joinRoom() {
+
+        if (!roomCode.trim()) {
+
+            alert("Enter room code");
 
             return;
 
         }
 
-        localStorage.setItem("roomCode",room);
 
-        navigate("/lobby");
+        socket.emit("joinRoom", {
+
+            roomCode:
+                roomCode.trim().toUpperCase(),
+
+            username: user.username
+
+        });
 
     }
 
-    return(
 
-        <div style={{textAlign:"center",marginTop:"120px"}}>
+    return (
+
+        <div
+            style={{
+                textAlign: "center",
+                marginTop: "120px"
+            }}
+        >
 
             <h1>Join Room</h1>
 
+
             <input
-
                 type="text"
-
                 placeholder="Enter Room Code"
-
-                value={room}
-
-                onChange={(e)=>setRoom(e.target.value.toUpperCase())}
-
+                value={roomCode}
+                maxLength={6}
+                onChange={(e) =>
+                    setRoomCode(
+                        e.target.value.toUpperCase()
+                    )
+                }
             />
 
-            <br/><br/>
+
+            <br />
+            <br />
+
 
             <button onClick={joinRoom}>
-
-                Join
-
+                Join Room
             </button>
 
         </div>
 
     );
-
 }
+
 
 export default JoinRoom;

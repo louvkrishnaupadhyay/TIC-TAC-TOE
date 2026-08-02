@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home.js";
 import Game from "./pages/Game.js";
 import ProtectedRoute from "./components/ProtectedRoute";
+import OnlineGame from "./pages/OnlineGame";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/join-room"
           element={
@@ -48,6 +50,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/lobby"
           element={
@@ -57,6 +60,14 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/online-game"
+          element={
+            <ProtectedRoute>
+              <OnlineGame />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

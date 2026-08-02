@@ -1,42 +1,95 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Lobby(){
+import socket from "../socket/socket";
 
-    const navigate=useNavigate();
 
-    const room=localStorage.getItem("roomCode");
+function Lobby() {
 
-    return(
+    const navigate = useNavigate();
 
-        <div style={{textAlign:"center",marginTop:"120px"}}>
+    const roomCode =
+        localStorage.getItem("roomCode");
+
+    const symbol =
+        localStorage.getItem("symbol");
+
+
+    useEffect(() => {
+
+        const handleGameStart = (data) => {
+
+            console.log(
+                "Game starting:",
+                data
+            );
+
+            navigate("/online-game");
+
+        };
+
+
+        socket.on(
+            "gameStart",
+            handleGameStart
+        );
+
+
+        return () => {
+
+            socket.off(
+                "gameStart",
+                handleGameStart
+            );
+
+        };
+
+    }, [navigate]);
+
+
+    function copyRoomCode() {
+
+        navigator.clipboard.writeText(
+            roomCode
+        );
+
+    }
+
+
+    return (
+
+        <div
+            style={{
+                textAlign: "center",
+                marginTop: "120px"
+            }}
+        >
 
             <h1>Waiting Lobby</h1>
 
-            <h2>Room Code</h2>
+            <p>Your symbol</p>
 
-            <h1>{room}</h1>
+            <h2>{symbol}</h2>
 
-            <button
-                onClick={()=>{
-                    navigator.clipboard.writeText(room);
-                    alert("Room Code Copied");
-                }}
-            >
+
+            <p>Room Code</p>
+
+            <h1>{roomCode}</h1>
+
+
+            <button onClick={copyRoomCode}>
                 Copy Room Code
             </button>
 
-            <br/><br/>
 
-            <button onClick={()=>navigate("/game")}>
-
-                Start Local Demo
-
-            </button>
+            <p>
+                Waiting for another player...
+            </p>
 
         </div>
 
     );
-
 }
+
 
 export default Lobby;
