@@ -26,6 +26,11 @@ app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
 
+app.use(
+  "/api/leaderboard",
+  require("./routes/leaderboardRoutes")
+);
+
 app.get("/", (req, res) => {
     res.send("Tic Tac Toe Backend Running 🚀");
 });

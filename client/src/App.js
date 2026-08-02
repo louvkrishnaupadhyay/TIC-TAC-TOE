@@ -9,6 +9,7 @@ import Home from "./pages/Home.js";
 import Game from "./pages/Game.js";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OnlineGame from "./pages/OnlineGame";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
@@ -68,6 +69,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/leaderboard"
+  element={<Leaderboard />}
+/>
       </Routes>
     </BrowserRouter>
   );
