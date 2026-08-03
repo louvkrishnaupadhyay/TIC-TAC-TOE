@@ -13,8 +13,8 @@ function Leaderboard() {
     async function fetchLeaderboard() {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/leaderboard"
-        );
+  `${process.env.REACT_APP_API_URL}/api/leaderboard`
+);
 
         const data = await response.json();
 
