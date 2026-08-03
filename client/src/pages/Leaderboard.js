@@ -76,7 +76,7 @@ function Leaderboard() {
 
           <button
             className="leaderboard-back"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
           >
             ← Back
           </button>

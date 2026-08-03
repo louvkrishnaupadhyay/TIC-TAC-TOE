@@ -1,0 +1,174 @@
+.ai-difficulty-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(124, 58, 237, 0.25),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37, 99, 235, 0.2),
+      transparent 35%
+    ),
+    #09090f;
+
+  color: white;
+}
+
+.ai-difficulty-card {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 45px;
+
+  border: 1px solid #27272a;
+  border-radius: 24px;
+
+  background: rgba(24, 24, 27, 0.85);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45);
+
+  text-align: center;
+}
+
+.ai-icon {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.ai-difficulty-card h1 {
+  margin: 0;
+
+  font-size: 40px;
+
+  background: linear-gradient(
+    90deg,
+    #a78bfa,
+    #60a5fa
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.ai-subtitle {
+  margin-top: 10px;
+  margin-bottom: 35px;
+
+  color: #a1a1aa;
+}
+
+.difficulty-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.difficulty-button {
+  width: 100%;
+
+  padding: 18px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #3f3f46;
+  border-radius: 14px;
+
+  background: #18181b;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.difficulty-button:hover {
+  transform: translateY(-3px);
+
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 10px 30px rgba(124, 58, 237, 0.18);
+}
+
+.difficulty-info {
+  text-align: left;
+}
+
+.difficulty-title {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.difficulty-description {
+  color: #a1a1aa;
+
+  font-size: 13px;
+}
+
+.difficulty-arrow {
+  font-size: 22px;
+
+  color: #71717a;
+}
+
+.easy-button:hover {
+  border-color: #22c55e;
+}
+
+.medium-button:hover {
+  border-color: #eab308;
+}
+
+.hard-button:hover {
+  border-color: #ef4444;
+}
+
+.ai-back-button {
+  margin-top: 30px;
+
+  padding: 11px 22px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #a1a1aa;
+
+  cursor: pointer;
+
+  font-size: 15px;
+}
+
+.ai-back-button:hover {
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .ai-difficulty-card {
+    padding: 30px 20px;
+  }
+
+  .ai-difficulty-card h1 {
+    font-size: 32px;
+  }
+}

@@ -10,6 +10,8 @@ import Game from "./pages/Game.js";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OnlineGame from "./pages/OnlineGame";
 import Leaderboard from "./pages/Leaderboard";
+import AIDifficulty from "./pages/AIDifficulty";
+import AIGame from "./pages/AIGame";
 
 function App() {
   return (
@@ -69,10 +71,10 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-  path="/leaderboard"
-  element={<Leaderboard />}
-/>
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/ai-difficulty" element={<AIDifficulty />} />
+
+        <Route path="/ai-game" element={<AIGame />} />
       </Routes>
     </BrowserRouter>
   );

@@ -7,8 +7,14 @@ function Home() {
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(AuthContext);
+
   function logout() {
+    // Remove authentication
     localStorage.removeItem("token");
+
+    // Remove old game data
+    localStorage.removeItem("roomCode");
+    localStorage.removeItem("symbol");
 
     setUser(null);
 
@@ -18,21 +24,83 @@ function Home() {
   return (
     <div className="home-container">
       <div className="home-card">
+
+        {/* TITLE */}
+
         <h1>TIC TAC TOE</h1>
 
-        <h2>Welcome, {user?.username} 👋</h2>
+        <h2>
+          Welcome, {user?.username} 
+        </h2>
 
-        <button onClick={() => navigate("/game")}>Play Local Game</button>
 
-        <button onClick={() => navigate("/create-room")}>Create Room</button>
+        {/* LOCAL GAME */}
 
-        <button onClick={() => navigate("/join-room")}>Join Room</button>
+        <button
+          className="home-btn"
+          onClick={() => navigate("/game")}
+        >
+          🎮 Play Local Game
+        </button>
 
-        <button disabled>Play With AI (Coming Soon)</button>
 
-        <button className="logout-btn" onClick={logout}>
+        {/* CREATE ONLINE ROOM */}
+
+        <button
+          className="home-btn"
+          onClick={() =>
+            navigate("/create-room")
+          }
+        >
+          🌐 Create Room
+        </button>
+
+
+        {/* JOIN ONLINE ROOM */}
+
+        <button
+          className="home-btn"
+          onClick={() =>
+            navigate("/join-room")
+          }
+        >
+          🔗 Join Room
+        </button>
+
+
+        {/* AI GAME */}
+
+        <button
+          className="home-btn ai-home-btn"
+          onClick={() =>
+            navigate("/ai-difficulty")
+          }
+        >
+          🤖 Play With AI
+        </button>
+
+
+        {/* LEADERBOARD */}
+
+        <button
+          className="home-btn leaderboard-home-btn"
+          onClick={() =>
+            navigate("/leaderboard")
+          }
+        >
+          🏆 Leaderboard
+        </button>
+
+
+        {/* LOGOUT */}
+
+        <button
+          className="logout-btn"
+          onClick={logout}
+        >
           Logout
         </button>
+
       </div>
     </div>
   );
