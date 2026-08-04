@@ -13,49 +13,87 @@ connectDB();
 
 const app = express();
 
-// Middleware
 
-app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
-}));
+// ==============================
+// ALLOWED FRONTEND ORIGINS
+// ==============================
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
+
+// ==============================
+// MIDDLEWARE
+// ==============================
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
-// API Routes
 
-app.use("/api/auth", require("./routes/authRoutes"));
+// ==============================
+// API ROUTES
+// ==============================
+
+app.use(
+  "/api/auth",
+  require("./routes/authRoutes")
+);
 
 app.use(
   "/api/leaderboard",
   require("./routes/leaderboardRoutes")
 );
 
+
+// ==============================
+// TEST ROUTE
+// ==============================
+
 app.get("/", (req, res) => {
-    res.send("Tic Tac Toe Backend Running 🚀");
+  res.send("Tic Tac Toe Backend Running 🚀");
 });
 
-// HTTP Server
+
+// ==============================
+// HTTP SERVER
+// ==============================
 
 const server = http.createServer(app);
 
-// Socket.IO Server
+
+// ==============================
+// SOCKET.IO SERVER
+// ==============================
 
 const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST"]
-    }
+  cors: {
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
 });
 
 
-// All multiplayer socket logic
+// Multiplayer socket logic
+
 socketHandler(io);
 
-// Start Server
+
+// ==============================
+// START SERVER
+// ==============================
 
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log("Allowed origins:", allowedOrigins);
 });
